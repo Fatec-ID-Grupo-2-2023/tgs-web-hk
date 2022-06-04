@@ -11,7 +11,7 @@
     <meta name="author" content="Caique Patelli Scapeline" />
     <meta name="author" content="Gianluca Dias De Micheli" />
 
-    <title>TGS | Cadastrar Funcionário</title>
+    <title>TGS | Editar Procedimento</title>
 
     <!-- Shortcut Icon -->
     <link rel="shortcut icon" href="assets/icons/logo_bg.svg" />
@@ -116,52 +116,61 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Cadastrar Funcionário</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Atualizar Procedimento</h1>
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row mb-4 p-4">
+                    <div class="row mb-4 p-4 justify-content-center">
+                        <div class="col-12 mb-2 form-subtitle">
+                            <h4>Dados Básicos</h4>
+                        </div>
+
+                        <?php
+                            $name = isset($_GET['name']) ? $_GET['name'] : null;
+                            $surname = isset($_GET['surname']) ? $_GET['surname'] : null;
+                            $document = isset($_GET['document']) ? $_GET['document'] : null;
+                            $email = isset($_GET['email']) ? $_GET['email'] : null;
+                            $telephone = isset($_GET['telephone']) ? $_GET['telephone'] : null;
+                            $cellphone = isset($_GET['cellphone']) ? $_GET['cellphone'] : null;
+                        ?>
 
                         <form class="row g-3" action="services/register.php" method="post">
-                            <div class="col-12 mb-2 form-subtitle">
-                                <h4>Dados Básicos</h4>
+
+                            <div class="mb-3 col-12 col-md-12">
+                                <label for="name" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<?= $name ?>">
                             </div>
                             <div class="mb-3 col-12 col-md-12">
-                                <label for="document" class="form-label">CPF <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="document" name="document" required>
-                            </div>
-                            <div class="mb-3 col-6 col-md-6">
-                                <label for="name" class="form-label">Nome <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="name" name="name" required>
-                            </div>
-                            <div class="mb-3 col-6 col-md-6">
-                                <label for="surname" class="form-label">Sobrenome <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="surname" name="surname" required>
+                                <label for="surname" class="form-label">Sobrenome</label>
+                                <input type="text" class="form-control" id="surname" name="surname" value="<?= $surname ?>">
                             </div>
                             <div class="mb-3 col-12 col-md-12">
-                                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <label for="document" class="form-label">CPF</label>
+                                <input type="text" class="form-control" id="document" name="document" value="<?= $document ?>">
+                            </div>
+                            <div class="mb-3 col-12 col-md-12">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" value="<?= $email ?>">
                             </div>
                             <div class="mb-3 col-6 col-md-6">
                                 <label for="telephone" class="form-label">Telefone</label>
-                                <input type="text" class="form-control" id="telephone" name="telephone" aria-describedby="telephoneHelp">
+                                <input type="text" class="form-control" id="telephone" name="telephone" value="<?= $telephone ?>" aria-describedby="telephoneHelp">
                                 <div id="telephoneHelp" class="form-text">Insira somente os números.</div>
                             </div>
                             <div class="mb-3 col-6 col-md-6">
-                                <label for="cellphone" class="form-label">Celular <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="cellphone" name="cellphone" aria-describedby="cellphoneHelp" required>
+                                <label for="cellphone" class="form-label">Celular</label>
+                                <input type="text" class="form-control" id="cellphone" name="cellphone" value="<?= $cellphone ?>" aria-describedby="cellphoneHelp" required>
                                 <div id="cellphoneHelp" class="form-text">Insira somente os números.</div>
                             </div>
                             <div class="mb-3 col-12 col-md-12">
-                                <label for="password" class="form-label">Senha <span class="text-danger">*</span></label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                                <label for="password" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="password" name="password">
                             </div>
 
                             <div class="col-12 btn-toolbar flex-row-reverse">
-                                <button type="submit" class="btn btn-primary" name="registerEmployee">Cadastrar</button>
+                                <button type="submit" class="btn btn-primary" name="updateEmployee">Atualizar</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -209,7 +218,7 @@
             </div>
         </div>
     </div>
-
+    
     <!-- Bootstrap core JavaScript-->
     <script src="assets/vendor/jquery/jquery.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -219,6 +228,13 @@
 
     <!-- Custom scripts for all pages-->
     <script src="assets/js/sb-admin-2.min.js"></script>
+
+    <!-- Page level plugins -->
+    <script src="assets/vendor/chart.js/Chart.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="assets/js/demo/chart-area-demo.js"></script>
+    <script src="assets/js/demo/chart-pie-demo.js"></script>
 
 </body>
 
