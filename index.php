@@ -224,6 +224,11 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
+                                        <?php
+                                            include_once 'services/requestAPI.php';
+                                            $json = requestApi('GET', 'http:/localhost:8080/consults/chart/line', null, $_SESSION['token']);                                            
+                                        ?>
+                                        <input type=text id="workaroundJson" style="display: none" value='<?= $json ?>'></input>                                   
                                         <canvas id="myAreaChart"></canvas>
                                     </div>
                                 </div>
