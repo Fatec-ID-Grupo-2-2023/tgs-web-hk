@@ -122,40 +122,44 @@
                     <!-- Content Row -->
                     <div class="row mb-4 p-4">
 
-                        <form class="row">
+                        <form class="row" action="services/register.php" method="post">
 
                             <div class="col-12 mb-2 form-subtitle">
                                 <h4>Dados Básicos</h4>
                             </div>
                             <div class="mb-3 col-12 col-md-6">
                                 <label for="name" class="form-label">Nome <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="name" required>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3 col-12 col-md-6">
+                                <label for="surname" class="form-label">Sobrenome</label>
+                                <input type="text" class="form-control" id="surname" name="surname">
                             </div>
                             <div class="mb-3 col-12 col-md-6">
                                 <label for="nickname" class="form-label">Apelido</label>
-                                <input type="text" class="form-control" id="nickname">
+                                <input type="text" class="form-control" id="nickname" name="nickname">
                             </div>
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="cpf" class="form-label">CPF <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="cpf" aria-describedby="cpfHelp" required>
+                                <input type="text" class="form-control" id="cpf" name="cpf" aria-describedby="cpfHelp" required>
                                 <div id="cpfHelp" class="form-text">Insira somente os números.</div>
                             </div>
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="rg" class="form-label">RG <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="rg" aria-describedby="rgHelp" required>
+                                <input type="text" class="form-control" id="rg" name="rg" aria-describedby="rgHelp" required>
                                 <div id="rgHelp" class="form-text">Insira somente os números.</div>
                             </div>
                             <div class="mb-3 col-8 col-md-4">
                                 <label for="birthDate" class="form-label">Data de Nascimento <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="birthDate" required>
+                                <input type="date" class="form-control" id="birthDate" name="birthDate" required>
                             </div>
-                            <div class="mb-3 col-2 col-md-1">
+                            <div class="mb-3 col-2 col-md-4">
                                 <label for="height" class="form-label">Altura</label>
-                                <input type="text" class="form-control" id="height">
+                                <input type="text" class="form-control" id="height" name="height">
                             </div>
-                            <div class="mb-3 col-2 col-md-1">
+                            <div class="mb-3 col-2 col-md-4">
                                 <label for="weight" class="form-label">Peso</label>
-                                <input type="text" class="form-control" id="weight">
+                                <input type="text" class="form-control" id="weight" name="weight">
                             </div>
 
                             <div class="col-12 mb-2 form-subtitle">
@@ -163,16 +167,16 @@
                             </div>
                             <div class="mb-3 col-12 col-md-6">
                                 <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" id="email" required>
+                                <input type="email" class="form-control" id="email" name="email" required>
                             </div>
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="telephone" class="form-label">Telefone</label>
-                                <input type="text" class="form-control" id="telephone" aria-describedby="telephoneHelp">
+                                <input type="text" class="form-control" id="telephone" name="telephone" aria-describedby="telephoneHelp">
                                 <div id="telephoneHelp" class="form-text">Insira somente os números.</div>
                             </div>
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="cellphone" class="form-label">Celular <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="cellphone" aria-describedby="cellphoneHelp" required>
+                                <input type="text" class="form-control" id="cellphone" name="cellphone" aria-describedby="cellphoneHelp" required>
                                 <div id="cellphoneHelp" class="form-text">Insira somente os números.</div>
                             </div>
 
@@ -181,36 +185,36 @@
                             </div>
                             <div class="mb-3 col-12 col-md-6">
                                 <label for="street" class="form-label">Rua <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="street" required>
+                                <input type="text" class="form-control" id="street" name="street" required>
                             </div>
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="number" class="form-label">Número <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="number" required>
+                                <input type="number" class="form-control" id="number" name="number" required>
                             </div>
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="cep" class="form-label">CEP <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="cep" aria-describedby="cepHelp" required>
+                                <input type="text" class="form-control" id="cep" name="cep" aria-describedby="cepHelp" required>
                                 <div id="cepHelp" class="form-text">Insira somente os números.</div>
                             </div>
                             <div class="mb-3 col-12 col-md-3">
                                 <label for="neighborhood" class="form-label">Bairro <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="neighborhood" required>
+                                <input type="text" class="form-control" id="neighborhood" name="neighborhood" required>
                             </div>
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="city" class="form-label">Cidade <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="city" required>
+                                <input type="text" class="form-control" id="city" name="city" required>
                             </div>
                             <div class="mb-3 col-3 col-md-3">
                                 <label for="district" class="form-label">Estado <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="district" maxlength="2" required>
+                                <input type="text" class="form-control" id="district" name="district" maxlength="2" required>
                             </div>
                             <div class="mb-3 col-3 col-md-3">
                                 <label for="complement" class="form-label">Complemento</label>
-                                <input type="text" class="form-control" id="complement">
+                                <input type="text" class="form-control" id="complement" name="complement">
                             </div>
 
                             <div class="col-12 btn-toolbar flex-row-reverse">
-                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                <button type="submit" class="btn btn-primary" name="registerPatient">Cadastrar</button>
                             </div>
                         </form>
                         
