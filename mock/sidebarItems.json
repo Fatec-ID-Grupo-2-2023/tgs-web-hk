@@ -1,0 +1,39 @@
+[
+    
+    {
+        "icon": "home",
+        "title": "Home",
+        "link": "index"
+    },
+    {
+        "icon": "calendar",
+        "title": "Calendário",
+        "link": "calendar"
+    },
+    {
+        "icon": "message",
+        "title": "Chat",
+        "link": "https://api.whatsapp.com/send?phone=5519992978232",
+        "target": "_blank"
+    },
+    {
+        "icon": "patients",
+        "title": "Pacientes",
+        "link": "patient-list"
+    },
+    {
+        "icon": "masks",
+        "title": "Dentistas",
+        "link": "dentist-list"
+    },
+    {
+        "icon": "suitcase",
+        "title": "Funcionários",
+        "link": "employee-list"
+    },
+    {
+        "icon": "search_file",
+        "title": "Procedimentos",
+        "link": "procedure-list"
+    }
+]
