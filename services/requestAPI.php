@@ -34,10 +34,6 @@
         
         $resultData = curl_exec($curl);
 
-        if(!$resultData){
-            return "Internal Server Error";
-        }
-
         curl_close($curl);
 
         return $resultData;
