@@ -11,7 +11,7 @@
     <meta name="author" content="Caique Patelli Scapeline" />
     <meta name="author" content="Gianluca Dias De Micheli" />
 
-    <title>TGS | Cadastrar Dentista</title>
+    <title>TGS | Atualizar Paciente</title>
 
     <!-- Shortcut Icon -->
     <link rel="shortcut icon" href="assets/icons/logo_bg.svg" />
@@ -141,82 +141,84 @@
                         ?>
 
                         <form class="row g-3" action="services/register.php" method="post">
-                            <form class="row g-3">
 
-                                <div class="mb-3 col-12 col-md-6">
-                                    <label for="name" class="form-label">Nome</label>
-                                    <input type="text" class="form-control" id="name" name="name" value="<?= $name ?>">
-                                </div>
-                                <div class="mb-3 col-12 col-md-6">
-                                    <label for="nickname" class="form-label">Apelido</label>
-                                    <input type="text" class="form-control" id="nickname" name="nickname" value="<?= $nickname ?>">
-                                </div>
-                                <div class="mb-3 col-6 col-md-3">
-                                    <label for="cpf" class="form-label">CPF</label>
-                                    <input type="text" class="form-control" id="cpf" name="cpf" value="<?= $cpf ?>">
-                                </div>
-                                <div class="mb-3 col-6 col-md-3">
-                                    <label for="rg" class="form-label">RG</label>
-                                    <input type="text" class="form-control" id="rg" name="rg" value="<?= $rg ?>">
-                                </div>
-                                <div class="mb-3 col-8 col-md-4">
-                                    <label for="birthDate" class="form-label">Data de Nascimento</label>
-                                    <input type="date" class="form-control" id="birthDate" name="birthDate" value="<?= $birthDate ?>">
-                                </div>
-                                <div class="mb-3 col-2 col-md-1">
-                                    <label for="height" class="form-label">Altura</label>
-                                    <input type="text" class="form-control" id="height" name="height" value="<?= $height ?>">
-                                </div>
-                                <div class="mb-3 col-2 col-md-1">
-                                    <label for="weight" class="form-label">Peso</label>
-                                    <input type="text" class="form-control" id="weight" name="weight" value="<?= $weigth ?>">
-                                </div>
-                                <div class="mb-3 col-12 col-md-6">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" value="<?= $email ?>">
-                                </div>
-                                <div class="mb-3 col-6 col-md-3">
-                                    <label for="telephone" class="form-label">Telefone</label>
-                                    <input type="text" class="form-control" id="telephone" name="telephone" value="<?= $telephone ?>">
-                                </div>
-                                <div class="mb-3 col-6 col-md-3">
-                                    <label for="cellphone" class="form-label">Celular</label>
-                                    <input type="text" class="form-control" id="cellphone" name="cellphone" value="<?= $cellphone ?>">
-                                </div>
-                                <div class="mb-3 col-12 col-md-6">
-                                    <label for="street" class="form-label">Rua</label>
-                                    <input type="text" class="form-control" id="street" name="street" value="<?= $street ?>">
-                                </div>
-                                <div class="mb-3 col-6 col-md-3">
-                                    <label for="number" class="form-label">Número</label>
-                                    <input type="number" class="form-control" id="number" name="number" value="<?= $number ?>">
-                                </div>
-                                <div class="mb-3 col-6 col-md-3">
-                                    <label for="cep" class="form-label">CEP</label>
-                                    <input type="text" class="form-control" id="cep" name="cep" value="<?= $cep ?>">
-                                </div>
-                                <div class="mb-3 col-12 col-md-3">
-                                    <label for="neighborhood" class="form-label">Bairro</label>
-                                    <input type="text" class="form-control" id="neighborhood" name="neighborhood" value="<?= $neighborhood ?>">
-                                </div>
-                                <div class="mb-3 col-6 col-md-3">
-                                    <label for="city" class="form-label">Cidade</label>
-                                    <input type="text" class="form-control" id="city" name="city" value="<?= $city ?>">
-                                </div>
-                                <div class="mb-3 col-3 col-md-3">
-                                    <label for="district" class="form-label">Estado</label>
-                                    <input type="text" class="form-control" id="district" name="district" value="<?= $district ?>">
-                                </div>
-                                <div class="mb-3 col-3 col-md-3">
-                                    <label for="complement" class="form-label">Complemento</label>
-                                    <input type="text" class="form-control" id="complement" name="complement" value="<?= $complement ?>">
-                                </div>
+                            <div class="mb-3 col-6 col-md-6">
+                                <label for="name" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<?= $name ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-6">
+                                <label for="surname" class="form-label">Sobrenome</label>
+                                <input type="text" class="form-control" id="surname" name="surname" value="<?= $surname ?>">
+                            </div>
+                            <div class="mb-3 col-12 col-md-6">
+                                <label for="nickname" class="form-label">Apelido</label>
+                                <input type="text" class="form-control" id="nickname" name="nickname" value="<?= $nickname ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="cpf" class="form-label">CPF</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf" value="<?= $cpf ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="rg" class="form-label">RG</label>
+                                <input type="text" class="form-control" id="rg" name="rg" value="<?= $rg ?>">
+                            </div>
+                            <div class="mb-3 col-8 col-md-4">
+                                <label for="birthDate" class="form-label">Data de Nascimento</label>
+                                <input type="date" class="form-control" id="birthDate" name="birthDate" value="<?= $birthDate ?>">
+                            </div>
+                            <div class="mb-3 col-2 col-md-1">
+                                <label for="height" class="form-label">Altura</label>
+                                <input type="text" class="form-control" id="height" name="height" value="<?= $height ?>">
+                            </div>
+                            <div class="mb-3 col-2 col-md-1">
+                                <label for="weight" class="form-label">Peso</label>
+                                <input type="text" class="form-control" id="weight" name="weight" value="<?= $weight ?>">
+                            </div>
+                            <div class="mb-3 col-12 col-md-6">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" value="<?= $email ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="telephone" class="form-label">Telefone</label>
+                                <input type="text" class="form-control" id="telephone" name="telephone" value="<?= $telephone ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="cellphone" class="form-label">Celular</label>
+                                <input type="text" class="form-control" id="cellphone" name="cellphone" value="<?= $cellphone ?>">
+                            </div>
+                            <div class="mb-3 col-12 col-md-6">
+                                <label for="street" class="form-label">Rua</label>
+                                <input type="text" class="form-control" id="street" name="street" value="<?= $street ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="number" class="form-label">Número</label>
+                                <input type="number" class="form-control" id="number" name="number" value="<?= $number ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="cep" class="form-label">CEP</label>
+                                <input type="text" class="form-control" id="cep" name="cep" value="<?= $cep ?>">
+                            </div>
+                            <div class="mb-3 col-12 col-md-3">
+                                <label for="neighborhood" class="form-label">Bairro</label>
+                                <input type="text" class="form-control" id="neighborhood" name="neighborhood" value="<?= $neighborhood ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="city" class="form-label">Cidade</label>
+                                <input type="text" class="form-control" id="city" name="city" value="<?= $city ?>">
+                            </div>
+                            <div class="mb-3 col-3 col-md-3">
+                                <label for="district" class="form-label">Estado</label>
+                                <input type="text" class="form-control" id="district" name="district" value="<?= $district ?>">
+                            </div>
+                            <div class="mb-3 col-3 col-md-3">
+                                <label for="complement" class="form-label">Complemento</label>
+                                <input type="text" class="form-control" id="complement" name="complement" value="<?= $complement ?>">
+                            </div>
 
-                                <div class="col-12 btn-toolbar flex-row-reverse">
-                                    <button type="submit" class="btn btn-primary" name="updatePatient">Atualizar </button>
-                                </div>
-                            </form>
-
+                            <div class="col-12 btn-toolbar flex-row-reverse">
+                                <button type="submit" class="btn btn-primary" name="updatePatient">Atualizar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <!-- /.container-fluid -->

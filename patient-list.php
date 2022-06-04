@@ -171,7 +171,7 @@
                                                         <td> " . $value->cellphone . " </td>
                                                         <td class='text-center'> 
                                                             <a href='#' class='btn btn-sm btn-primary' data-toggle='modal' data-target='#detailModal" . $value->cpf . "'><i class='fas fa-eye'></i></a>
-                                                            <a href='patient-edit.php?id=" . $value->cpf . "&rg=" . $value->rg . "&name=" . $value->name . "&surname=" . $value->surname . "&nickname=" . $value->nickname . "&birthDate=" . $value->birthDate . "&height=" . $value->height . "&weight=" . $value->weigth . "&email=" . $value->email . "&telephone=" . $value->telephone . "&cellphone=" . $value->cellphone . "&street=" . $value->street . "&neighborhood=" . $value->neighborhood . "&city=" . $value->city . "&district=" . $value->district . "&cep=" . $value->cep . "&number=" . $value->number . "&compliment=" . $value->compliment . "' class='btn btn-sm btn-warning'><i class='fas fa-pen'></i></a>
+                                                            <a href='patient-edit.php?cpf=" . $value->cpf . "&rg=" . $value->rg . "&name=" . $value->name . "&surname=" . $value->surname . "&nickname=" . $value->nickname . "&birthDate=" . $value->birthDate . "&height=" . $value->height . "&weight=" . $value->weight . "&email=" . $value->email . "&telephone=" . $value->telephone . "&cellphone=" . $value->cellphone . "&street=" . $value->street . "&neighborhood=" . $value->neighborhood . "&city=" . $value->city . "&district=" . $value->district . "&cep=" . $value->cep . "&number=" . $value->number . "&complement=" . $value->complement . "' class='btn btn-sm btn-warning'><i class='fas fa-pen'></i></a>
                                                             " . $workaround . "
                                                         </td>
                                                     </tr>";
@@ -279,7 +279,7 @@
                                     </div>
                                     <div class='mb-3 col-2 col-md-2'>
                                         <label for='weight' class='form-label'>Peso</label>
-                                        <input type='text' class='form-control' id='weight' value='" . $value->weigth . "' disabled>
+                                        <input type='text' class='form-control' id='weight' value='" . $value->weight . "' disabled>
                                     </div>
                                     <div class='mb-3 col-12 col-md-12'>
                                         <label for='email' class='form-label'>Email</label>
@@ -319,12 +319,12 @@
                                     </div>
                                     <div class='mb-3 col-12 col-md-12'>
                                         <label for='complement' class='form-label'>Complemento</label>
-                                        <input type='text' class='form-control' id='complement' value='" . $value->compliment . "' disabled>
+                                        <input type='text' class='form-control' id='complement' value='" . $value->complement . "' disabled>
                                     </div>
                                 </form>
                             </div>
                             <div class='modal-footer'>
-                                <a href='patient-edit.php?id=" . $value->cpf . "&rg=" . $value->rg . "&name=" . $value->name . "&surname=" . $value->surname . "&nickname=" . $value->nickname . "&birthDate=" . $value->birthDate . "&height=" . $value->height . "&weight=" . $value->weigth . "&email=" . $value->email . "&telephone=" . $value->telephone . "&cellphone=" . $value->cellphone . "&street=" . $value->street . "&neighborhood=" . $value->neighborhood . "&city=" . $value->city . "&district=" . $value->district . "&cep=" . $value->cep . "&number=" . $value->number . "&compliment=" . $value->compliment . "' class='btn btn-primary'>Editar</a>
+                                <a href='patient-edit.php?id=" . $value->cpf . "&rg=" . $value->rg . "&name=" . $value->name . "&surname=" . $value->surname . "&nickname=" . $value->nickname . "&birthDate=" . $value->birthDate . "&height=" . $value->height . "&weight=" . $value->weight . "&email=" . $value->email . "&telephone=" . $value->telephone . "&cellphone=" . $value->cellphone . "&street=" . $value->street . "&neighborhood=" . $value->neighborhood . "&city=" . $value->city . "&district=" . $value->district . "&cep=" . $value->cep . "&number=" . $value->number . "&complement=" . $value->complement . "' class='btn btn-primary'>Editar</a>
                             </div>
                         </div>
                     </div>
@@ -363,14 +363,14 @@
         }
         if (isset($_POST['confirmDeletion'])){
             $postData = array (
-                "cpf" => $patientCPF,
+                "cpf" => $value->cpf,
                 "rg" => $value->rg,
                 "name" => $value->name,
                 "surname" => $value->surname,
                 "nickname" => $value->nickname,
                 "birthDate" => $value->birthDate,
                 "height" => $value->height,
-                "weigth" => $value->weigth,
+                "weight" => $value->weight,
                 "email" => $value->email,
                 "telephone" => $value->telephone,
                 "cellphone" => $value->cellphone,
@@ -380,7 +380,7 @@
                 "district" => $value->district,
                 "cep" => $value->cep,
                 "number" => $value->number,
-                "compliment" => $value->compliment
+                "complement" => $value->complement
             );
 
             $response = requestApi('POST', 'http:/localhost:8080/patients/remove', $postData, $_SESSION['token']);

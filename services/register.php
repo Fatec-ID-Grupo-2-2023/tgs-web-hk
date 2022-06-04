@@ -130,7 +130,7 @@
                                 "nickname" => $patientNickname,
                                 "birthDate" => $patientBirthDate,
                                 "height" => $patientHeight,
-                                "weigth" => $patientWeight,
+                                "weight" => $patientWeight,
                                 "email" => $patientEmail,
                                 "telephone" => $patientTelephone,
                                 "cellphone" => $patientCellphone,
@@ -140,9 +140,9 @@
                                 "district" => $patientDistrict,
                                 "cep" => $patientCEP,
                                 "number" => $patientNumber,
-                                "compliment" => $patientComplement,
+                                "complements" => $patientComplement
                             );
-        
+
                             $response = requestApi('POST', 'http:/localhost:8080/patients/', $postData, $_SESSION['token']);
             
                             echo "<script> window.location = '../patient-list.php?response=" . $response . "' </script>";
