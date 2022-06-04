@@ -1,4 +1,4 @@
-<?php include_once 'services/verificar-token.php' ?>
+<?php include_once 'services/verificar-token.php'; $status = isset($_GET['status']) ? $_GET['status'] : true?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,6 +22,7 @@
 
     <!-- Custom styles for this template-->
     <link href="assets/css/sb-admin-2.css" rel="stylesheet">
+    <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
@@ -130,47 +131,48 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        <div class="d-flex card-header py-3 justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Listagem de Procedimentos</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="disabledProcedures" onchange="status()" <?= isset($_GET['status']) ? 'checked' : '' ?>>
+                                <label class="form-check-label" for="disabledProcedures">
+                                    Exibir procedimentos desativados
+                                </label>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Título</th>
+                                            <th>Descrição</th>
+                                            <th class="text-center" style="width:150px">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>$320,800</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>Tokyo</td>
-                                            <td>63</td>
-                                            <td>2011/07/25</td>
-                                            <td>$170,750</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Ashton Cox</td>
-                                            <td>Junior Technical Author</td>
-                                            <td>San Francisco</td>
-                                            <td>66</td>
-                                            <td>2009/01/12</td>
-                                            <td>$86,000</td>
-                                        </tr>
+                                        <?php
+                                            include_once 'services/requestAPI.php';
+                                            $json = requestApi('GET', 'http:/localhost:8080/procedures/list/' . $status, false, $_SESSION['token']);
+                                            $data = json_decode($json);
+
+                                            foreach ($data as $key => $value){
+                                                if ($value->status){
+                                                    $workaround = "<a href='#' class='btn btn-sm btn-danger' data-toggle='modal' data-target='#removeModal" . $value->id . "'><i class='fas fa-trash'></i></a>";
+                                                } else {
+                                                    $workaround = "";
+                                                }
+                                                echo "<tr>
+                                                        <td> " . $value->title . " </td>
+                                                        <td> " . $value->description . " </td>
+                                                        <td class='text-center'> 
+                                                            <a href='#' class='btn btn-sm btn-primary' data-toggle='modal' data-target='#detailModal" . $value->id . "'><i class='fas fa-eye'></i></a>
+                                                            <a href='procedure-edit.php?id=" . $value->id . "&title=" . $value->title . "&description=" . $value->description . "' class='btn btn-sm btn-warning'><i class='fas fa-pen'></i></a>
+                                                            " . $workaround . "
+                                                        </td>
+                                                    </tr>";
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -223,6 +225,93 @@
             </div>
         </div>
     </div>
+    
+    <!-- Detail Modal-->
+    <?php
+        include_once 'services/requestAPI.php';
+        $json = requestApi('GET', 'http:/localhost:8080/procedures/list', false, $_SESSION['token']);
+        $data = json_decode($json);
+
+        foreach ($data as $key => $value){
+            echo "
+                <div class='modal fade' id='detailModal" . $value->id . "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel'
+                    aria-hidden='true'>
+                    <div class='modal-dialog' role='document'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='exampleModalLabel'>Detalhes do Procedimento</h5>
+                                <button class='close' type='button' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>×</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>
+                                <form class='row g-3'>
+
+                                    <div class='mb-3 col-12 col-md-12 d-none'>
+                                        <input type='text' class='form-control' id='id' value='" . $value->id . "' disabled>
+                                    </div>
+                                
+                                    <div class='mb-3 col-12 col-md-12'>
+                                        <label for='title' class='form-label'>Título</label>
+                                        <input type='text' class='form-control' id='title' value='" . $value->title . "' disabled>
+                                    </div>
+                                    
+                                    <div class='mb-3 col-12 col-md-12'>
+                                        <label for='description' class='form-label'>Descrição</label>
+                                        <input type='text' class='form-control' id='description' name='description' value='" . $value->description . "' disabled></input>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class='modal-footer'>
+                                <a href='procedure-edit.php?id=" . $value->id . "&title=" . $value->title . "&description=" . $value->description . "' class='btn btn-primary'>Editar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+        }
+    ?>
+
+    <!-- Remove Modal-->
+    <?php
+        include_once 'services/requestAPI.php';
+        $json = requestApi('GET', 'http:/localhost:8080/procedures/list', false, $_SESSION['token']);
+        $data = json_decode($json);
+
+        foreach ($data as $key => $value){
+            echo "
+                <div class='modal fade' id='removeModal" . $value->id . "' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel'
+                    aria-hidden='true'>
+                    <div class='modal-dialog' role='document'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h5 class='modal-title' id='exampleModalLabel'>Tem certeza que quer exluir esse registro?</h5>
+                                <button class='close' type='button' data-dismiss='modal' aria-label='Close'>
+                                    <span aria-hidden='true'>×</span>
+                                </button>
+                            </div>
+                            <div class='modal-body'>Selecione 'Sim' para confirmar a exclusão.</div>
+                            <div class='modal-footer'>
+                                <form action='' method='post'>
+                                    <button class='btn btn-secondary' type='button' data-dismiss='modal'>Não</button>
+                                    <button class='btn btn-primary' type='submit' name='confirmDeletion'>Sim</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>";
+        }
+        if (isset($_POST['confirmDeletion'])){
+            $postData = array (
+                "id" => $value->id,
+                "title" => $value->title,
+                "description" => $value->description
+            );
+
+            $response = requestApi('POST', 'http:/localhost:8080/procedures/remove', $postData, $_SESSION['token']);
+
+            echo "<script> window.location = 'procedure-list.php?response=" . $response . "' </script>";
+        }
+    ?>
 
     <!-- Bootstrap core JavaScript-->
     <script src="assets/vendor/jquery/jquery.min.js"></script>
@@ -235,35 +324,50 @@
     <script src="assets/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>    
 
     <!-- Page level custom scripts -->
-    <script src="assets/js/demo/chart-area-demo.js"></script>
-    <script src="assets/js/demo/chart-pie-demo.js"></script>
+    <script src="assets/js/demo/datatables-demo.js"></script>
+
+    <script>
+        function status(){
+            if (<?= $status ?> == false){
+                window.location='procedure-list.php';
+            } else {
+                window.location='procedure-list.php?status=false';
+            }
+        }
+    </script>
 
 </body>
 
 </html>
+
 <?php
 
-    if (isset($_GET['response']) == "OK"){
-        echo "<script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Sucesso!',
-                text: 'Procedimento cadastrado com sucesso!',
-                confirmButtonUrl: 'procedure-list.php'
-            })
-        </script>";
-    } else if (isset($_GET['response']) == "Internal Server Error") {
-        echo "<script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Algo deu errado ao cadastrar o procedimento!',
-                confirmButtonUrl: 'procedure-list.php'
-            })
-        </script>";
+    $response = isset($_GET['response']) ? $_GET['response'] : null;
+
+    if (isset($response)){
+        if ($response == '200 OK'){
+            echo "<script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Sucesso!',
+                    text: 'Operação realizada com sucesso!',
+                    confirmButtonUrl: 'procedure-list.php'
+                })
+            </script>";
+        } else {
+            echo "<script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Algo deu errado ao cadastrar o procedimento!',
+                    confirmButtonUrl: 'procedure-list.php'
+                })
+            </script>";
+        }
     }
 
 ?>

@@ -11,7 +11,7 @@
     <meta name="author" content="Caique Patelli Scapeline" />
     <meta name="author" content="Gianluca Dias De Micheli" />
 
-    <title>TGS | Cadastrar Procedimento</title>
+    <title>TGS | Editar Procedimento</title>
 
     <!-- Shortcut Icon -->
     <link rel="shortcut icon" href="assets/icons/logo_bg.svg" />
@@ -124,20 +124,31 @@
                         <div class="col-12 mb-2 form-subtitle">
                             <h4>Dados Básicos</h4>
                         </div>
+
+                        <?php
+                            $id = isset($_GET['id']) ? $_GET['id'] : null;
+                            $title = isset($_GET['title']) ? $_GET['title'] : null;
+                            $description = isset($_GET['description']) ? $_GET['description'] : null;
+                        ?>
+
                         <form class="row g-3" action="services/register.php" method="post">
+
+                            <div class="mb-3 col-12 col-md-12 d-none">
+                                <input type="text" class="form-control" id="id" name="id" value="<?= $id ?>">
+                            </div>
                         
                             <div class="mb-3 col-12 col-md-12">
                                 <label for="title" class="form-label">Título <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="title" name="title" required>
+                                <input type="text" class="form-control" id="title" name="title" value="<?= $title ?>">
                             </div>
                             
                             <div class="mb-3 col-12 col-md-12">
                                 <label for="description" class="form-label">Descrição</label>
-                                <input type="text" class="form-control" id="description" name="description"></input>
+                                <input type="text" class="form-control" id="description" name="description" value="<?= $description ?>"></input>
                             </div>
 
                             <div class="col-12 btn-toolbar flex-row-reverse">
-                                <button type="submit" class="btn btn-primary" name="registerProcedure">Cadastrar</button>
+                                <button type="submit" class="btn btn-primary" name="updateProcedure">Atualizar</button>
                             </div>
                         </form>
                     </div>
