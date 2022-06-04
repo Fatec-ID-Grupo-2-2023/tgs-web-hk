@@ -11,7 +11,7 @@
     <meta name="author" content="Caique Patelli Scapeline" />
     <meta name="author" content="Gianluca Dias De Micheli" />
 
-    <title>TGS | Dentists</title>
+    <title>TGS | Dentistas</title>
 
     <!-- Shortcut Icon -->
     <link rel="shortcut icon" href="assets/icons/logo_bg.svg" />

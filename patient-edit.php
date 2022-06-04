@@ -11,7 +11,7 @@
     <meta name="author" content="Caique Patelli Scapeline" />
     <meta name="author" content="Gianluca Dias De Micheli" />
 
-    <title>TGS | Agendar Consulta</title>
+    <title>TGS | Atualizar Paciente</title>
 
     <!-- Shortcut Icon -->
     <link rel="shortcut icon" href="assets/icons/logo_bg.svg" />
@@ -79,15 +79,12 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION['name'] ?></span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
@@ -116,82 +113,112 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Agendar Consulta</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Atualizar Paciente</h1>
                     </div>
 
                     <!-- Content Row -->
-                    <div class="row mb-4 p-4 justify-content-center">
+                    <div class="row mb-4 p-4">
 
-                        <form class="row">
-                            <div class="mb-3 col-12 col-md-6">
-                                <!-- Choose Patient -->
-                                <label for="patient" class="form-label">Paciente <span class="text-danger">*</span></label>
-                                <select class="form-control" required>
-                                    <option selected>Selecione um paciente</option>
-                                    <?php
+                        <?php
+                            $name = isset($_GET['name']) ? $_GET['name'] : null;
+                            $surname = isset($_GET['surname']) ? $_GET['surname'] : null;
+                            $nickname = isset($_GET['nickname']) ? $_GET['nickname'] : null;
+                            $cpf = isset($_GET['cpf']) ? $_GET['cpf'] : null;
+                            $rg = isset($_GET['rg']) ? $_GET['rg'] : null;
+                            $birthDate = isset($_GET['birthDate']) ? $_GET['birthDate'] : null;
+                            $height = isset($_GET['height']) ? $_GET['height'] : null;
+                            $weight = isset($_GET['weight']) ? $_GET['weight'] : null;
+                            $email = isset($_GET['email']) ? $_GET['email'] : null;
+                            $telephone = isset($_GET['telephone']) ? $_GET['telephone'] : null;
+                            $cellphone = isset($_GET['cellphone']) ? $_GET['cellphone'] : null;
+                            $street = isset($_GET['street']) ? $_GET['street'] : null;
+                            $number = isset($_GET['number']) ? $_GET['number'] : null;
+                            $cep = isset($_GET['cep']) ? $_GET['cep'] : null;
+                            $neighborhood = isset($_GET['neighborhood']) ? $_GET['neighborhood'] : null;
+                            $city = isset($_GET['city']) ? $_GET['city'] : null;
+                            $district = isset($_GET['district']) ? $_GET['district'] : null;
+                            $complement = isset($_GET['complement']) ? $_GET['complement'] : null;
+                        ?>
 
-                                        include_once 'services/requestAPI.php';
-                                        $json = requestApi('GET', 'http:/localhost:8080/patients/list/true', false, $_SESSION['token']);
-                                        $data = json_decode($json);
+                        <form class="row g-3" action="services/register.php" method="post">
 
-                                        foreach ($data as $key => $value){
-                                            echo "<option value='" . $value->cpf . "'>" . $value->name . " " . $value->surname . "</option>";
-                                        }
-
-                                    ?>
-                                </select>
+                            <div class="mb-3 col-6 col-md-6">
+                                <label for="name" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="name" name="name" value="<?= $name ?>">
                             </div>
-                            <!-- Choose Dentist -->
-                            <div class="mb-3 col-12 col-md-6">
-                                <label for="dentist" class="form-label">Dentista <span class="text-danger">*</span></label>
-                                <select class="form-control" required>
-                                    <option selected>Selecione um dentista</option>
-                                    <?php
-
-                                        include_once 'services/requestAPI.php';
-                                        $json = requestApi('GET', 'http:/localhost:8080/dentists/list/true', false, $_SESSION['token']);
-                                        $data = json_decode($json);
-
-                                        foreach ($data as $key => $value){
-                                            echo "<option value='" . $value->userId . "'>" . $value->name . " " . $value->surname . "</option>";
-                                        }
-
-                                    ?>
-                                </select>
+                            <div class="mb-3 col-6 col-md-6">
+                                <label for="surname" class="form-label">Sobrenome</label>
+                                <input type="text" class="form-control" id="surname" name="surname" value="<?= $surname ?>">
                             </div>
-                            <!-- Choose Procedure -->
                             <div class="mb-3 col-12 col-md-6">
-                                <label for="procedure" class="form-label">Procedimento <span class="text-danger">*</span></label>
-                                <select class="form-control" required>
-                                    <option selected>Selecione um procedimento</option>
-                                    <?php
-
-                                        include_once 'services/requestAPI.php';
-                                        $json = requestApi('GET', 'http:/localhost:8080/procedures/list/true', false, $_SESSION['token']);
-                                        $data = json_decode($json);
-
-                                        foreach ($data as $key => $value){
-                                            echo "<option value='" . $value->id . "'>" . $value->title . "</option>";
-                                        }
-
-                                    ?>
-                                </select>
+                                <label for="nickname" class="form-label">Apelido</label>
+                                <input type="text" class="form-control" id="nickname" name="nickname" value="<?= $nickname ?>">
                             </div>
-                            <!-- Consult Date -->
                             <div class="mb-3 col-6 col-md-3">
-                                <label for="date" class="form-label">Data <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="date" required>
+                                <label for="cpf" class="form-label">CPF</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf" value="<?= $cpf ?>">
                             </div>
-                            <!-- Consult Hour -->
                             <div class="mb-3 col-6 col-md-3">
-                                <label for="time" class="form-label">Hora <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" id="time" required>
+                                <label for="rg" class="form-label">RG</label>
+                                <input type="text" class="form-control" id="rg" name="rg" value="<?= $rg ?>">
                             </div>
+                            <div class="mb-3 col-8 col-md-4">
+                                <label for="birthDate" class="form-label">Data de Nascimento</label>
+                                <input type="date" class="form-control" id="birthDate" name="birthDate" value="<?= $birthDate ?>">
+                            </div>
+                            <div class="mb-3 col-2 col-md-1">
+                                <label for="height" class="form-label">Altura</label>
+                                <input type="text" class="form-control" id="height" name="height" value="<?= $height ?>">
+                            </div>
+                            <div class="mb-3 col-2 col-md-1">
+                                <label for="weight" class="form-label">Peso</label>
+                                <input type="text" class="form-control" id="weight" name="weight" value="<?= $weight ?>">
+                            </div>
+                            <div class="mb-3 col-12 col-md-6">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" value="<?= $email ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="telephone" class="form-label">Telefone</label>
+                                <input type="text" class="form-control" id="telephone" name="telephone" value="<?= $telephone ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="cellphone" class="form-label">Celular</label>
+                                <input type="text" class="form-control" id="cellphone" name="cellphone" value="<?= $cellphone ?>">
+                            </div>
+                            <div class="mb-3 col-12 col-md-6">
+                                <label for="street" class="form-label">Rua</label>
+                                <input type="text" class="form-control" id="street" name="street" value="<?= $street ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="number" class="form-label">Número</label>
+                                <input type="number" class="form-control" id="number" name="number" value="<?= $number ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="cep" class="form-label">CEP</label>
+                                <input type="text" class="form-control" id="cep" name="cep" value="<?= $cep ?>">
+                            </div>
+                            <div class="mb-3 col-12 col-md-3">
+                                <label for="neighborhood" class="form-label">Bairro</label>
+                                <input type="text" class="form-control" id="neighborhood" name="neighborhood" value="<?= $neighborhood ?>">
+                            </div>
+                            <div class="mb-3 col-6 col-md-3">
+                                <label for="city" class="form-label">Cidade</label>
+                                <input type="text" class="form-control" id="city" name="city" value="<?= $city ?>">
+                            </div>
+                            <div class="mb-3 col-3 col-md-3">
+                                <label for="district" class="form-label">Estado</label>
+                                <input type="text" class="form-control" id="district" name="district" value="<?= $district ?>">
+                            </div>
+                            <div class="mb-3 col-3 col-md-3">
+                                <label for="complement" class="form-label">Complemento</label>
+                                <input type="text" class="form-control" id="complement" name="complement" value="<?= $complement ?>">
+                            </div>
+
                             <div class="col-12 btn-toolbar flex-row-reverse">
-                                <button type="submit" class="btn btn-primary">Agendar</button>
+                                <button type="submit" class="btn btn-primary" name="updatePatient">Atualizar</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
                 <!-- /.container-fluid -->
@@ -221,8 +248,7 @@
     </a>
 
     <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">

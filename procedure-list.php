@@ -229,7 +229,7 @@
     <!-- Detail Modal-->
     <?php
         include_once 'services/requestAPI.php';
-        $json = requestApi('GET', 'http:/localhost:8080/procedures/list', false, $_SESSION['token']);
+        $json = requestApi('GET', 'http:/localhost:8080/procedures/list/' . $status, false, $_SESSION['token']);
         $data = json_decode($json);
 
         foreach ($data as $key => $value){
@@ -274,7 +274,7 @@
     <!-- Remove Modal-->
     <?php
         include_once 'services/requestAPI.php';
-        $json = requestApi('GET', 'http:/localhost:8080/procedures/list', false, $_SESSION['token']);
+        $json = requestApi('GET', 'http:/localhost:8080/procedures/list/' . $status, false, $_SESSION['token']);
         $data = json_decode($json);
 
         foreach ($data as $key => $value){

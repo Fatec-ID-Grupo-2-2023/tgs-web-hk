@@ -116,7 +116,7 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Cadastrar Procedimento</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Atualizar Procedimento</h1>
                     </div>
 
                     <!-- Content Row -->
@@ -138,7 +138,7 @@
                             </div>
                         
                             <div class="mb-3 col-12 col-md-12">
-                                <label for="title" class="form-label">Título <span class="text-danger">*</span></label>
+                                <label for="title" class="form-label">Título</label>
                                 <input type="text" class="form-control" id="title" name="title" value="<?= $title ?>">
                             </div>
                             
