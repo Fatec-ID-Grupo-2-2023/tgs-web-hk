@@ -127,30 +127,54 @@
                                 <!-- Choose Patient -->
                                 <label for="patient" class="form-label">Paciente <span class="text-danger">*</span></label>
                                 <select class="form-control" required>
-                                    <option selected></option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option selected>Selecione um paciente</option>
+                                    <?php
+
+                                        include_once 'services/requestAPI.php';
+                                        $json = requestApi('GET', 'http:/localhost:8080/patients/list/true', false, $_SESSION['token']);
+                                        $data = json_decode($json);
+
+                                        foreach ($data as $key => $value){
+                                            echo "<option value='" . $value->cpf . "'>" . $value->name . " " . $value->surname . "</option>";
+                                        }
+
+                                    ?>
                                 </select>
                             </div>
                             <!-- Choose Dentist -->
                             <div class="mb-3 col-12 col-md-6">
                                 <label for="dentist" class="form-label">Dentista <span class="text-danger">*</span></label>
                                 <select class="form-control" required>
-                                    <option selected></option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option selected>Selecione um dentista</option>
+                                    <?php
+
+                                        include_once 'services/requestAPI.php';
+                                        $json = requestApi('GET', 'http:/localhost:8080/dentists/list/true', false, $_SESSION['token']);
+                                        $data = json_decode($json);
+
+                                        foreach ($data as $key => $value){
+                                            echo "<option value='" . $value->userId . "'>" . $value->name . " " . $value->surname . "</option>";
+                                        }
+
+                                    ?>
                                 </select>
                             </div>
                             <!-- Choose Procedure -->
                             <div class="mb-3 col-12 col-md-6">
                                 <label for="procedure" class="form-label">Procedimento <span class="text-danger">*</span></label>
                                 <select class="form-control" required>
-                                    <option selected></option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option selected>Selecione um procedimento</option>
+                                    <?php
+
+                                        include_once 'services/requestAPI.php';
+                                        $json = requestApi('GET', 'http:/localhost:8080/procedures/list/true', false, $_SESSION['token']);
+                                        $data = json_decode($json);
+
+                                        foreach ($data as $key => $value){
+                                            echo "<option value='" . $value->id . "'>" . $value->title . "</option>";
+                                        }
+
+                                    ?>
                                 </select>
                             </div>
                             <!-- Consult Date -->

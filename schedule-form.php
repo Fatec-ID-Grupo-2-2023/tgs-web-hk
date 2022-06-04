@@ -127,10 +127,18 @@
                             <div class="mb-3 col-12 col-md-3">
                                 <label for="dentist" class="form-label">Dentista <span class="text-danger">*</span></label>
                                 <select class="form-control" required>
-                                    <option selected></option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option selected>Selecione um dentista</option>
+                                    <?php
+
+                                        include_once 'services/requestAPI.php';
+                                        $json = requestApi('GET', 'http:/localhost:8080/dentists/list/true', false, $_SESSION['token']);
+                                        $data = json_decode($json);
+
+                                        foreach ($data as $key => $value){
+                                            echo "<option value='" . $value->userId . "'>" . $value->name . " " . $value->surname . "</option>";
+                                        }
+
+                                    ?>
                                 </select>
                             </div>
                             <!-- Consult Duration -->
