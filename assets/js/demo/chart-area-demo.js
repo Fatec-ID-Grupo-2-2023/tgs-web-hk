@@ -29,14 +29,14 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");
-var json = $('#workaroundJson').val();
-const convertedJson = JSON.parse(json.replace("\\", ""));
+var json = $('#workaroundJsonChartLine').val();
+const convertedLineJson = JSON.parse(json.replace("\\", ""));
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: convertedJson.labels,
+    labels: convertedLineJson.map((item) => {return item[0]}),
     datasets: [{
-      label: "Earnings",
+      label: "Consultas",
       lineTension: 0.3,
       backgroundColor: "rgba(78, 115, 223, 0.05)",
       borderColor: "rgba(78, 115, 223, 1)",
@@ -48,7 +48,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: convertedJson.data,
+      data: convertedLineJson.map((item) => {return item[1]}),
     }],
   },
   options: {
@@ -80,7 +80,7 @@ var myLineChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return 'R$' + number_format(value);
+            return number_format(value);
           }
         },
         gridLines: {
@@ -112,7 +112,7 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': R$' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ": " + number_format(tooltipItem.yLabel);
         }
       }
     }
