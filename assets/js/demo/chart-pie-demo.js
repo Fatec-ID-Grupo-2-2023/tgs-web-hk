@@ -4,14 +4,16 @@ Chart.defaults.global.defaultFontColor = '#858796';
 
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
+var json = $('#workaroundJsonPieChart').val();
+const convertedPieJson = JSON.parse(json.replace("\\", ""));
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: convertedPieJson.map((item) => {return item[0]}),
     datasets: [{
-      data: [55, 30, 15],
-      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
-      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+      data: convertedPieJson.map((item) => {return item[1]}),
+      backgroundColor: ['#027373', '#13678A' ,'#45C4B0', '#9AEBA3','#DAFDBA', '#10454F', '#506266', '#818274', '#A3AB78', '#BDE038'],
+      hoverBackgroundColor: [],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
     }],
   },

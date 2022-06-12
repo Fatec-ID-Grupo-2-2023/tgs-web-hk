@@ -92,19 +92,6 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -117,6 +104,13 @@
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Procedimentos</li>
+                        </ol>
+                    </nav>
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -293,18 +287,16 @@
                             <div class='modal-footer'>
                                 <form action='' method='post'>
                                     <button class='btn btn-secondary' type='button' data-dismiss='modal'>Não</button>
-                                    <button class='btn btn-primary' type='submit' name='confirmDeletion'>Sim</button>
+                                    <a href='procedure-list.php?id=" . $value->id . "' class='btn btn-primary'>Sim</a>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>";
         }
-        if (isset($_POST['confirmDeletion'])){
+        if (isset($_GET['id'])){
             $postData = array (
-                "id" => $value->id,
-                "title" => $value->title,
-                "description" => $value->description
+                "id" => $_GET['id']
             );
 
             $response = requestApi('POST', 'http:/localhost:8080/procedures/remove', $postData, $_SESSION['token']);
@@ -349,7 +341,7 @@
     $response = isset($_GET['response']) ? $_GET['response'] : null;
 
     if (isset($response)){
-        if ($response == '200 OK'){
+        if (strpos($response, 'OK') !== false){
             echo "<script>
                 Swal.fire({
                     icon: 'success',
@@ -363,7 +355,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Algo deu errado ao cadastrar o procedimento!',
+                    text: '" . $response . "',
                     confirmButtonUrl: 'procedure-list.php'
                 })
             </script>";
