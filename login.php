@@ -63,12 +63,15 @@
                                     ?>
                                     <form class="user" action="services/register.php" method="post">
                                         <div class="form-group">
-                                            <input type="user" class="form-control form-control-user"
+                                            <input type="user" style="border-right: 1px solid #d1d3e2" class="form-control form-control-user"
                                                 id="user" name="user" placeholder="Usuário">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="input-group mb-3">
                                             <input type="password" class="form-control form-control-user"
-                                                id="password" name="password" placeholder="Senha">
+                                            id="password" name="password" placeholder="Senha" aria-describedby="eye">
+                                            <div class="input-group-append" onclick="showPassword()">
+                                                <span class="input-group-text"><i id="eye" class="fas fa-eye"></i></span>
+                                            </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block" name="login">
                                             Login
@@ -95,6 +98,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="assets/js/sb-admin-2.min.js"></script>
+    <script src="assets/js/custom.js"></script>
 
 </body>
 
