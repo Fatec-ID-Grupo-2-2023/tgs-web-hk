@@ -1,4 +1,8 @@
-<?php include_once 'services/verificar-token.php' ?>
+<?php
+
+use function PHPSTORM_META\map;
+
+ include_once 'services/verificar-token.php' ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -88,19 +92,6 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
@@ -114,6 +105,14 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="calendar.php">Calendário</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Agendar Consulta</li>
+                        </ol>
+                    </nav>
+
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Agendar Consulta</h1>
@@ -122,11 +121,11 @@
                     <!-- Content Row -->
                     <div class="row mb-4 p-4 justify-content-center">
 
-                        <form class="row">
+                        <form class="row" action="services/register.php" method="post">
                             <div class="mb-3 col-12 col-md-6">
                                 <!-- Choose Patient -->
                                 <label for="patient" class="form-label">Paciente <span class="text-danger">*</span></label>
-                                <select class="form-control" required>
+                                <select class="form-control" name="patient" required>
                                     <option selected>Selecione um paciente</option>
                                     <?php
 
@@ -144,7 +143,7 @@
                             <!-- Choose Dentist -->
                             <div class="mb-3 col-12 col-md-6">
                                 <label for="dentist" class="form-label">Dentista <span class="text-danger">*</span></label>
-                                <select class="form-control" required>
+                                <select class="form-control" name="dentist" required>
                                     <option selected>Selecione um dentista</option>
                                     <?php
 
@@ -162,7 +161,7 @@
                             <!-- Choose Procedure -->
                             <div class="mb-3 col-12 col-md-6">
                                 <label for="procedure" class="form-label">Procedimento <span class="text-danger">*</span></label>
-                                <select class="form-control" required>
+                                <select class="form-control" name="procedure" required>
                                     <option selected>Selecione um procedimento</option>
                                     <?php
 
@@ -178,17 +177,25 @@
                                 </select>
                             </div>
                             <!-- Consult Date -->
-                            <div class="mb-3 col-6 col-md-3">
-                                <label for="date" class="form-label">Data <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="date" required>
-                            </div>
-                            <!-- Consult Hour -->
-                            <div class="mb-3 col-6 col-md-3">
-                                <label for="time" class="form-label">Hora <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" id="time" required>
+                            <div class="mb-3 col-12 col-md-6">
+                                <label for="date" class="form-label">Horário <span class="text-danger">*</span></label>
+                                <select class="form-control" name="dateTime" onchange="" required>
+                                    <option selected>Selecione um horário</option>
+                                    <?php
+
+                                        include_once 'services/requestAPI.php';
+                                        $json = requestApi('GET', 'http:/localhost:8080/consults/list/0', false, $_SESSION['token']);
+                                        $data = json_decode($json);
+
+                                        foreach ($data as $key => $value){
+                                            echo "<option value='" . $value->dateTime . " " . $value->id . "'>" . date_format(date_create($value->dateTime),"d/m/Y H:i:s") . "</option>";
+                                        }
+
+                                    ?>
+                                </select>
                             </div>
                             <div class="col-12 btn-toolbar flex-row-reverse">
-                                <button type="submit" class="btn btn-primary">Agendar</button>
+                                <button type="submit" class="btn btn-primary" name="scheduleAppointment">Agendar</button>
                             </div>
                         </form>
 

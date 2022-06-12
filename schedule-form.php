@@ -114,6 +114,14 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="calendar.php">Calendário</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Abrir Agenda</li>
+                        </ol>
+                    </nav>
+
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Abrir Agenda</h1>
@@ -122,11 +130,11 @@
                     <!-- Content Row -->
                     <div class="row mb-4 p-4">
 
-                        <form class="row">
+                        <form class="row" id="schedule-from" action="services/register.php" method="post">
                             <!-- Choose Dentist -->
                             <div class="mb-3 col-12 col-md-3">
                                 <label for="dentist" class="form-label">Dentista <span class="text-danger">*</span></label>
-                                <select class="form-control" required>
+                                <select class="form-control" name="dentist" required>
                                     <option selected>Selecione um dentista</option>
                                     <?php
 
@@ -144,43 +152,42 @@
                             <!-- Consult Duration -->
                             <div class="mb-3 col-12 col-md-3">
                                 <label for="duration" class="form-label">Duração da Consulta <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" id="duration" required>
+                                <input type="time" class="form-control" name="duration" required>
                             </div>
                             <!-- Schedul Start Date -->
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="beginDate" class="form-label">Data Inicial <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="beginDate" required>
+                                <input type="date" class="form-control" name="beginDate" required>
                             </div>
                             <!-- Schedule Final Date -->
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="endDate" class="form-label">Data Final <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="endDate" required>
+                                <input type="date" class="form-control" name="endDate" required>
                             </div>
                             <!-- Start Work Hour -->
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="beginWork" class="form-label">Inicio do Expediente <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" id="beginWork" required>
+                                <input type="time" class="form-control" name="beginWork" required>
                             </div>
                             <!-- Final Work Hour -->
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="endWork" class="form-label">Fim do Expediente <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" id="endWork" required>
+                                <input type="time" class="form-control" name="endWork" required>
                             </div>
                             <!-- Start Lunch Hour -->
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="beginLunch" class="form-label">Inicio do Almoço <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" id="beginLunch" required>
+                                <input type="time" class="form-control" name="beginLunch" required>
                             </div>
                             <!-- Final Lunch Hour -->
                             <div class="mb-3 col-6 col-md-3">
                                 <label for="endLunch" class="form-label">Fim do Almoço <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" id="endLunch" required>
+                                <input type="time" class="form-control" name="endLunch" required>
                             </div>
                             <div class="col-12 btn-toolbar flex-row-reverse">
-                                <button type="submit" class="btn btn-primary">Abrir</button>
+                                <button type="submit" class="btn btn-primary" name="openSechdule">Abrir</button>
                             </div>
                         </form>
-
                     </div>
                 </div>
                 <!-- /.container-fluid -->
