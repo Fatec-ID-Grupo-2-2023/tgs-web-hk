@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Fatec-ID-Grupo-2-2023/tgs-web-hk/main/assets/img/Banner.png" />
+  <img src="https://github.com/Fatec-ID-Grupo-2-2023/tgs-web-hk/blob/main/assets/img/banner.png" />
 </p>
 
 <p align="center">
