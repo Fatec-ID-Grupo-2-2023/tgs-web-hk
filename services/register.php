@@ -14,12 +14,14 @@
 
         $response = requestApi('POST', 'http:/localhost:8080/login', $postData);
 
-        if (strcmp($response, "OK")){
-            // session_cache_limiter('private');
-            // session_cache_expire(60);
-            
+        if (strcmp($response, "OK")){                
             $_SESSION['token'] = $response;
-            $_SESSION['name'] = json_decode(requestApi('GET', 'http:/localhost:8080/dentists/' . $user, false, $_SESSION['token']))->name;
+            $_SESSION['user'] = $user;
+            if (explode("-", $user)[0] == "DTN"){
+                $_SESSION['name'] = json_decode(requestApi('GET', 'http:/localhost:8080/dentists/' . explode("-", $user)[1], false, $_SESSION['token']))->name;
+            } else if (explode("-", $user)[0] == "EPL"){
+                $_SESSION['name'] = json_decode(requestApi('GET', 'http:/localhost:8080/employees/' . explode("-", $user)[1], false, $_SESSION['token']))->name;
+            }
             echo "<script> window.location = '../index.php' </script>";
         } else {
             echo "<script> window.location = '../login.php?response=unauthorized' </script>";
@@ -135,7 +137,7 @@
                                 "telephone" => $patientTelephone,
                                 "cellphone" => $patientCellphone,
                                 "street" => $patientStreet,
-                                "neighborhood" => $patientNumber,
+                                "neighborhood" => $patientNeighborhood,
                                 "city" => $patientCity,
                                 "district" => $patientDistrict,
                                 "cep" => $patientCEP,
@@ -145,7 +147,55 @@
 
                             $response = requestApi('POST', 'http:/localhost:8080/patients/', $postData, $_SESSION['token']);
             
-                            echo "<script> window.location = '../patient-list.php?response=" . $response . "' </script>";
+                            echo "<script> window.location = '../patient-list.php?response=" . $response . "' </script>"; 
+                        } else {
+                            if (isset($_POST['openSechdule'])){
+                                $dentist = isset($_POST['dentist']) ? $_POST['dentist'] : null;
+                                $duration = isset($_POST['duration']) ? $_POST['duration'] : null;
+                                $beginDate = isset($_POST['beginDate']) ? $_POST['beginDate'] : null;
+                                $endDate = isset($_POST['endDate']) ? $_POST['endDate'] : null;
+                                $beginWork = isset($_POST['beginWork']) ? $_POST['beginWork'] : null;
+                                $endWork = isset($_POST['endWork']) ? $_POST['endWork'] : null;
+                                $beginLunch = isset($_POST['beginLunch']) ? $_POST['beginLunch'] : null;
+                                $endLunch = isset($_POST['endLunch']) ? $_POST['endLunch'] : null;
+
+                                $postData = array (
+                                    "dentist" => array ("userId" => $dentist),
+                                    "employee" => array ("userId" => $_SESSION['user']),
+                                    "consultDuration" => date('H:i:s', strtotime($duration)),
+                                    "startDate" => $beginDate,
+                                    "finalDate" => $endDate,
+                                    "startWorkHour" => date('H:i:s', strtotime($beginWork)),
+                                    "finalWorkHour" => date('H:i:s', strtotime($endWork)),
+                                    "startLunchHour" => date('H:i:s', strtotime($beginLunch)),
+                                    "finalLunchHour" => date('H:i:s', strtotime($endLunch))
+                                );
+
+                                $response = requestApi('POST', 'http:/localhost:8080/consults/schedule/open', $postData, $_SESSION['token']);
+                                echo "<script> window.location = '../calendar.php?response=" . $response . "' </script>"; 
+                            } else {
+                                if (isset($_POST['scheduleAppointment'])){
+                                    $patient = isset($_POST['patient']) ? $_POST['patient'] : null;
+                                    $dentist = isset($_POST['dentist']) ? $_POST['dentist'] : null;
+                                    $procedure = isset($_POST['procedure']) ? $_POST['procedure'] : null;
+                                    $date = explode(" ", isset($_POST['dateTime']) ? $_POST['dateTime'] : null)[0];
+                                    $time = explode(" ", isset($_POST['dateTime']) ? $_POST['dateTime'] : null)[1];
+                                    $id = explode(" ", isset($_POST['dateTime']) ? $_POST['dateTime'] : null)[2];
+                                    
+                                    $postData = array (
+                                        "id" => $id,
+                                        "patient" => array ("cpf" => $patient),
+                                        "dentist" => array ("userId" => $dentist),
+                                        "date" => $date,
+                                        "hour" => $time,
+                                        "procedure" => array ("id" => $procedure),
+                                        "employee" => array ("userId" => $_SESSION['user'])
+                                    );
+
+                                    $response = requestApi('POST', 'http:/localhost:8080/consults/', $postData, $_SESSION['token']);
+                                    echo "<script> window.location = '../calendar.php?response=" . $response . "' </script>"; 
+                                }
+                            }
                         }
                     }
                 }
